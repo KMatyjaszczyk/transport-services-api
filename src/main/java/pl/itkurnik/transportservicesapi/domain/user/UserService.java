@@ -1,4 +1,4 @@
-package pl.itkurnik.transportservicesapi.domain;
+package pl.itkurnik.transportservicesapi.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

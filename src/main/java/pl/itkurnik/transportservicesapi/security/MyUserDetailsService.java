@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.itkurnik.transportservicesapi.api.ErrorCodes;
-import pl.itkurnik.transportservicesapi.domain.UserEntity;
-import pl.itkurnik.transportservicesapi.domain.UserService;
+import pl.itkurnik.transportservicesapi.domain.user.UserEntity;
+import pl.itkurnik.transportservicesapi.domain.user.UserService;
 
 import java.util.Collections;
 

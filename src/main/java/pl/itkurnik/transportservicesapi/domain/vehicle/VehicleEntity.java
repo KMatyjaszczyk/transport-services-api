@@ -1,4 +1,4 @@
-package pl.itkurnik.transportservicesapi.domain;
+package pl.itkurnik.transportservicesapi.domain.vehicle;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,30 +9,34 @@ import org.hibernate.annotations.Parameter;
 import javax.persistence.*;
 
 @Entity
-@Table(
-        name = "user",
-        uniqueConstraints = { @UniqueConstraint(name = "user_email_unique", columnNames = { "email" }) }
-)
+@Table(name = "vehicle")
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserEntity {
+public class VehicleEntity {
     @Id
-    @GeneratedValue(generator = "user-sequence-generator")
+    @GeneratedValue(generator = "vehicle-sequence-generator")
     @GenericGenerator(
-            name = "user-sequence-generator",
+            name = "vehicle-sequence-generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "user_sequence"),
+                    @Parameter(name = "sequence_name", value = "vehicle_sequence"),
                     @Parameter(name = "initial_value", value = "4"),
                     @Parameter(name = "increment_size", value = "1")
             }
     )
     private Long id;
 
-    @Column(name = "email", length = 60)
-    private String email;
+    @Column(name = "brand")
+    private String brand;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "model")
+    private String model;
+
+    @Column(name = "production_year")
+    private int productionYear;
+
+    @Column(name = "number_of_seats")
+    private int numberOfSeats;
+
 }
