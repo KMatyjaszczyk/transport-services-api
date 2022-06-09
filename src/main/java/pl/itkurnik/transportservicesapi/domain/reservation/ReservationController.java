@@ -39,4 +39,9 @@ public class ReservationController {
     public void update(@RequestBody UpdateReservationRequest request) {
         reservationService.update(request);
     }
+
+    @PutMapping("/{id}")
+    public void cancelById(@PathVariable Long id) {
+        reservationService.cancelById(id);
+    }
 }

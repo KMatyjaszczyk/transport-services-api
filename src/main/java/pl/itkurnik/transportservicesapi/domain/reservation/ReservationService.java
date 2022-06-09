@@ -32,8 +32,7 @@ public class ReservationService {
     }
 
     public void create(CreateReservationRequest request) {
-        String userEmail = receiveCurrentUserEmail();
-        UserEntity user = findUserByEmail(userEmail);
+        UserEntity user = receiveCurrentUser();
         VehicleEntity vehicle = findVehicleById(request.getVehicleId());
 
         ReservationEntity reservation = new ReservationEntity();
@@ -60,19 +59,18 @@ public class ReservationService {
     }
 
     public void deleteById(Long id) {
-        String userEmail = receiveCurrentUserEmail();
-        UserEntity user = findUserByEmail(userEmail);
+        UserEntity user = receiveCurrentUser();
 
         validateReservation(id, user);
         reservationRepository.deleteById(id);
     }
 
     public void update(UpdateReservationRequest request) {
-        String userEmail = receiveCurrentUserEmail();
-        UserEntity user = findUserByEmail(userEmail);
+        UserEntity user = receiveCurrentUser();
         VehicleEntity vehicle = findVehicleById(request.getVehicleId());
 
         ReservationEntity reservation = validateReservation(request.getId(), user);
+        validateIfIsCancelled(reservation);
 
         reservation.setCustomerName(request.getCustomerName());
         reservation.setVehicle(vehicle);
@@ -85,6 +83,23 @@ public class ReservationService {
         reservationRepository.save(reservation);
     }
 
+    public void cancelById(Long id) {
+        UserEntity user = receiveCurrentUser();
+        ReservationEntity reservation = validateReservation(id, user);
+        validateIfIsCancelled(reservation);
+
+        reservation.setStatus(ReservationStatus.CANCELLED);
+        reservation.setLastUpdateDate(new Date());
+        reservationRepository.save(reservation);
+    }
+
+
+
+    private UserEntity receiveCurrentUser() {
+        String userEmail = receiveCurrentUserEmail();
+        return findUserByEmail(userEmail);
+    }
+
     private ReservationEntity validateReservation(Long id, UserEntity user) {
         ReservationEntity reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException(ErrorCodes.RESERVATION_NOT_FOUND));
@@ -95,6 +110,12 @@ public class ReservationService {
         }
 
         return reservation;
+    }
+
+    private void validateIfIsCancelled(ReservationEntity reservation) {
+        if (reservation.getStatus() == ReservationStatus.CANCELLED) {
+            throw new RuntimeException(ErrorCodes.RESERVATION_CANCELLED);
+        }
     }
 
     private String receiveCurrentUserEmail() {

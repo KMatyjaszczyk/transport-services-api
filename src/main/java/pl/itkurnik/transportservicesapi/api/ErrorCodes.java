@@ -9,4 +9,5 @@ public class ErrorCodes {
 
     public static String RESERVATION_NOT_FOUND = "Reservation not found";
     public static String NOT_HIS_OWN_RESERVATION = "User wants to manipulate not his own reservation";
+    public static String RESERVATION_CANCELLED = "Reservation is cancelled";
 }
