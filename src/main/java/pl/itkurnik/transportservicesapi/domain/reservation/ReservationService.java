@@ -40,7 +40,7 @@ public class ReservationService {
         reservation.setVehicle(vehicle);
         reservation.setType(request.getReservationType());
         reservation.setDepartureDate(request.getDepartureDate());
-        reservation.setDeparturePlace(request.getDeparturePlace());
+        reservation.setDestination(request.getDeparturePlace());
         reservation.setUser(user);
         reservation.setCreationDate(new Date());
         reservation.setStatus(ReservationStatus.CREATED);
@@ -76,7 +76,7 @@ public class ReservationService {
         reservation.setVehicle(vehicle);
         reservation.setType(request.getReservationType());
         reservation.setDepartureDate(request.getDepartureDate());
-        reservation.setDeparturePlace(request.getDeparturePlace());
+        reservation.setDestination(request.getDeparturePlace());
         reservation.setStatus(ReservationStatus.EDITED);
         reservation.setLastUpdateDate(new Date());
 

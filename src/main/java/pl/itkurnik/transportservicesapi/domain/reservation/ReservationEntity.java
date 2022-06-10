@@ -49,8 +49,8 @@ public class ReservationEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date departureDate;
 
-    @Column(name = "departure_place")
-    private String departurePlace;
+    @Column(name = "destination")
+    private String destination;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
