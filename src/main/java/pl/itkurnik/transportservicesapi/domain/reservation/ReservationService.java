@@ -76,7 +76,7 @@ public class ReservationService {
         reservation.setVehicle(vehicle);
         reservation.setType(request.getReservationType());
         reservation.setDepartureDate(request.getDepartureDate());
-        reservation.setDestination(request.getDeparturePlace());
+        reservation.setDestination(request.getDestination());
         reservation.setStatus(ReservationStatus.EDITED);
         reservation.setLastUpdateDate(new Date());
 
