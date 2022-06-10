@@ -15,5 +15,5 @@ public class CreateReservationRequest {
     private Long vehicleId;
     private ReservationType reservationType;
     private Date departureDate;
-    private String departurePlace;
+    private String destination;
 }
