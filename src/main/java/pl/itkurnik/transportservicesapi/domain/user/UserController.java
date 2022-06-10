@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.itkurnik.transportservicesapi.api.ErrorCodes;
+import pl.itkurnik.transportservicesapi.domain.user.dto.TokenValidationResponse;
 import pl.itkurnik.transportservicesapi.security.JwtUtil;
 import pl.itkurnik.transportservicesapi.security.MyUserDetailsService;
 import pl.itkurnik.transportservicesapi.security.model.AuthenticationRequest;
@@ -45,4 +46,8 @@ public class UserController {
         userService.registerUser(user);
     }
 
+    @PostMapping("/validate")
+    public TokenValidationResponse validateToken(@RequestBody String token) {
+        return new TokenValidationResponse(userDetailsService.validateToken(token));
+    }
 }

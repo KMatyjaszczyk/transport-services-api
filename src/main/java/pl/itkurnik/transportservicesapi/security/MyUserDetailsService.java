@@ -16,6 +16,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
     private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -24,5 +25,15 @@ public class MyUserDetailsService implements UserDetailsService {
 
 
         return new User(userByEmail.getEmail(), userByEmail.getPassword(), Collections.emptyList());
+    }
+
+    public Boolean validateToken(String token) {
+        try {
+            String username = jwtUtil.extractUsername(token);
+            UserDetails user = loadUserByUsername(username);
+            return jwtUtil.validateToken(token, user);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
