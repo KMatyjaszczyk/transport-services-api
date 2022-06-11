@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.itkurnik.transportservicesapi.api.ErrorCodes;
+import pl.itkurnik.transportservicesapi.domain.user.dto.CreateUserRequest;
 import pl.itkurnik.transportservicesapi.domain.user.dto.TokenValidationResponse;
 import pl.itkurnik.transportservicesapi.security.JwtUtil;
 import pl.itkurnik.transportservicesapi.security.MyUserDetailsService;
@@ -45,9 +46,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody UserEntity user) {
-        log.info("Registering user {}", user.getEmail());
-        userService.registerUser(user);
+    public void register(@RequestBody CreateUserRequest request) {
+        log.info("Registering user {}", request.getEmail());
+        userService.registerUser(request);
     }
 
     @PostMapping("/validate")
