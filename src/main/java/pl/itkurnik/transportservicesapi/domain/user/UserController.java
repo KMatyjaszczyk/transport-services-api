@@ -1,6 +1,7 @@
 package pl.itkurnik.transportservicesapi.domain.user;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,6 +21,7 @@ import pl.itkurnik.transportservicesapi.security.model.AuthenticationResponse;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailsService userDetailsService;
@@ -28,6 +30,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
+        log.info("Logging in with username {}", request.getUsername());
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
@@ -43,11 +46,13 @@ public class UserController {
 
     @PostMapping("/register")
     public void register(@RequestBody UserEntity user) {
+        log.info("Registering user {}", user.getEmail());
         userService.registerUser(user);
     }
 
     @PostMapping("/validate")
     public TokenValidationResponse validateToken(@RequestBody String token) {
+        log.info("Validating token {}", token);
         return new TokenValidationResponse(userDetailsService.validateToken(token));
     }
 }
