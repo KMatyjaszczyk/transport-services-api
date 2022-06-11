@@ -13,4 +13,7 @@ public class ErrorCodes {
     public static String RESERVATION_NOT_FOUND = "Reservation not found";
     public static String NOT_HIS_OWN_RESERVATION = "User wants to manipulate not his own reservation";
     public static String RESERVATION_CANCELLED = "Reservation is cancelled";
+    public static String INVALID_CUSTOMER_NAME = "Invalid customer name";
+    public static String INVALID_DESTINATION  = "Invalid destination";
+    public static String DATE_FROM_THE_PAST = "Departure date is from the past";
 }
