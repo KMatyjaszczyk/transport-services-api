@@ -21,6 +21,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final UserService userService;
     private final VehicleService vehicleService;
+    private final ReservationValidator validator;
 
     public List<ReservationEntity> findAll() {
         return reservationRepository.findAll();
@@ -32,6 +33,8 @@ public class ReservationService {
     }
 
     public void create(CreateReservationRequest request) {
+        validator.validateCreateRequestData(request);
+
         UserEntity user = receiveCurrentUser();
         VehicleEntity vehicle = findVehicleById(request.getVehicleId());
 
@@ -66,6 +69,8 @@ public class ReservationService {
     }
 
     public void update(UpdateReservationRequest request) {
+        validator.validateUpdateRequestData(request);
+
         UserEntity user = receiveCurrentUser();
         VehicleEntity vehicle = findVehicleById(request.getVehicleId());
 

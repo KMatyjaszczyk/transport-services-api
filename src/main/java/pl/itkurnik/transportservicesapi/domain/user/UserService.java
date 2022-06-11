@@ -26,7 +26,7 @@ public class UserService {
     private void validateRequestData(CreateUserRequest request) {
         Pattern emailPattern = Pattern.compile("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$");
         Matcher matcher = emailPattern.matcher(request.getEmail());
-        if (!matcher.find()) {
+        if (!matcher.matches()) {
             throw new RuntimeException(ErrorCodes.INVALID_EMAIL);
         }
 
